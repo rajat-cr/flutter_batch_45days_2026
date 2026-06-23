@@ -16,8 +16,10 @@ class _ColumnScreenState extends State<ColumnScreen> {
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
+
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start, // Horizontal work in Column
+       //   mainAxisAlignment: MainAxisAlignment.start, // Vertical work in Coulmn
           children: [
             Text("Bipasha", style: TextStyle(fontSize: 20)),
             Text("Vanshika", style: TextStyle(fontSize: 20)),
