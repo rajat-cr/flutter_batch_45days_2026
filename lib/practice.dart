@@ -19,6 +19,9 @@ class _PracticeState extends State<Practice> {
         backgroundColor: Colors.brown,
       ),
       body: Center(child: Text("I'm Vanshuu")),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home))
+      ]),
     );
   }
 }
