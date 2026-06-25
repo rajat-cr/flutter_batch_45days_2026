@@ -19,9 +19,41 @@ class _PracticeState extends State<Practice> {
         backgroundColor: Colors.brown,
       ),
       body: Center(child: Text("I'm Vanshuu")),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home))
-      ]),
+    );
+  }
+}
+
+class VanshikaPractice extends StatefulWidget {
+  const VanshikaPractice({super.key});
+
+  @override
+  State<VanshikaPractice> createState() => _VanshikaPracticeState();
+}
+
+class _VanshikaPracticeState extends State<VanshikaPractice> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Row List"), backgroundColor: Colors.blue),
+
+      body: SizedBox(
+        width: double.infinity,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Riya"),
+              SizedBox(width: 5),
+              Text("Vanshika"),
+              SizedBox(width: 5),
+              Text("Bipasha"),
+              SizedBox(width: 5),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
