@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class HomeScreen2 extends StatefulWidget {
   const HomeScreen2({super.key});
@@ -10,6 +12,32 @@ class HomeScreen2 extends StatefulWidget {
 class _HomeScreen2State extends State<HomeScreen2> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Home Screen"));
+    return SizedBox(
+      width: double.infinity,
+      // height: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              // Fluttertoast.showToast(
+              //   msg: "This is Alert Message!",
+              //   toastLength: Toast.LENGTH_SHORT,
+              // );
+              print("My name is :Coder Roots");
+            },
+            child: Text("Eleavted Button"),
+          ),
+
+          SizedBox(height: 10),
+          OutlinedButton(onPressed: () {}, child: Text("Outlined Button")),
+
+          SizedBox(height: 10),
+
+          TextButton(onPressed: () {}, child: Text("Text Button")),
+        ],
+      ),
+    );
   }
 }
