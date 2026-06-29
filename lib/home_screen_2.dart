@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class HomeScreen2 extends StatefulWidget {
   const HomeScreen2({super.key});
 
@@ -21,23 +20,50 @@ class _HomeScreen2State extends State<HomeScreen2> {
         children: [
           ElevatedButton(
             onPressed: () {
-              // Fluttertoast.showToast(
-              //   msg: "This is Alert Message!",
-              //   toastLength: Toast.LENGTH_SHORT,
-              // );
+              Fluttertoast.showToast(msg: "This my Alert Message!");
+
               print("My name is :Coder Roots");
             },
             child: Text("Eleavted Button"),
           ),
 
           SizedBox(height: 10),
-          OutlinedButton(onPressed: () {}, child: Text("Outlined Button")),
+          OutlinedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text("This is my Snackbar")));
+            },
+            child: Text("Outlined Button"),
+          ),
 
           SizedBox(height: 10),
 
-          TextButton(onPressed: () {}, child: Text("Text Button")),
+          TextButton(
+            onPressed: () {
+              showAlertDailog(context);
+            },
+            child: Text("Text Button"),
+          ),
         ],
       ),
     );
   }
+}
+
+void showAlertDailog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Title"),
+        
+        content: Text("This is my Alert Message"),
+        actions: [
+          TextButton(onPressed: () {}, child: Text("Cancel")),
+          TextButton(onPressed: () {}, child: Text("Accept")),
+        ],
+      );
+    },
+  );
 }
