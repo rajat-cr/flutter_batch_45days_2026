@@ -38,6 +38,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
           ),
 
           SizedBox(height: 10),
+        
 
           TextButton(
             onPressed: () {
@@ -45,6 +46,9 @@ class _HomeScreen2State extends State<HomeScreen2> {
             },
             child: Text("Text Button"),
           ),
+          SizedBox(height: 10),
+
+
         ],
       ),
     );
