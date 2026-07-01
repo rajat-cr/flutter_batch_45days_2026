@@ -10,6 +10,35 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Profile Screen"));
+    return ListView(
+      children: [
+        ListTile(title: Text("Riya"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Bipasha"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Vanshika"), subtitle: Text("B.Tech")),
+        ListTile(title: Text("Riya"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Bipasha"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Vanshika"), subtitle: Text("B.Tech")),
+        ListTile(title: Text("Riya"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Bipasha"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Vanshika"), subtitle: Text("B.Tech")),
+        ListTile(title: Text("Riya"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Bipasha"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Vanshika"), subtitle: Text("B.Tech")),
+
+        ListTile(title: Text("Riya"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Bipasha"), subtitle: Text("MCA")),
+
+        ListTile(title: Text("Vanshika"), subtitle: Text("B.Tech")),
+      ],
+    );
   }
 }

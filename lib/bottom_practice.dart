@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_45days_2026/home_screen_2.dart';
+import 'package:flutter_batch_45days_2026/list_build.dart';
 import 'package:flutter_batch_45days_2026/profile_screen.dart';
 import 'package:flutter_batch_45days_2026/search_screen.dart' show SearchScreen;
 
@@ -13,7 +14,7 @@ class BottomPractice extends StatefulWidget {
 class _BottomPracticeState extends State<BottomPractice> {
   int selectedIndex = 0;
 
-  List screen = [HomeScreen2(), SearchScreen(), ProfileScreen()];
+  List screen = [HomeScreen2(), SearchScreen(), ProfileScreen(), ListBuild()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +70,17 @@ class _BottomPracticeState extends State<BottomPractice> {
                   selectedIndex == 2
                       ? Icons.account_circle
                       : Icons.account_circle_outlined,
+                ),
+              ),
+
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    selectedIndex = 3;
+                  });
+                },
+                icon: Icon(
+                  selectedIndex == 3 ? Icons.list : Icons.list_alt_outlined,
                 ),
               ),
             ],

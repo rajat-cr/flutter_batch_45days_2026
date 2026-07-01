@@ -87,6 +87,23 @@ class _CustomBotttomBarState extends State<CustomBotttomBar> {
                   });
                 },
               ),
+
+              GestureDetector(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.list),
+                    SizedBox(height: 5),
+                    Text("List"),
+                  ],
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 3;
+                    print("check SelectedIndex value: $selectedIndex");
+                  });
+                },
+              ),
             ],
           ),
         ),
