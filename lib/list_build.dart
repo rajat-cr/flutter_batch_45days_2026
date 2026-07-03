@@ -9,8 +9,11 @@ class ListBuild extends StatefulWidget {
 }
 
 class _ListBuildState extends State<ListBuild> {
-  List<String> nameList = ["Bipasha", "Riya", "Vanshika", "Rahul", "Vijay"];
+  List<Student> nameList = [];
   TextEditingController nameCOntroller = TextEditingController();
+  TextEditingController classController = TextEditingController();
+  TextEditingController rollNoController = TextEditingController();
+  TextEditingController idController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +26,27 @@ class _ListBuildState extends State<ListBuild> {
               onTap: () {
                 print("CHeck INdex value: $index");
                 setState(() {
-                  nameList[index] = "Rahul Sharma";
+                  customDialog(context, index);
                 });
               },
               child: Card(
                 margin: EdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text(nameList[index]),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 5),
+                      Text(nameList[index].id.toString()),
+                      SizedBox(height: 5),
+                      Text(nameList[index].name.toString()),
+                      SizedBox(height: 5),
+                      Text(nameList[index].className.toString()),
+                      SizedBox(height: 5),
+                      Text(nameList[index].rollNo.toString()),
+                      SizedBox(height: 5),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -47,7 +58,7 @@ class _ListBuildState extends State<ListBuild> {
           right: 10,
           child: FloatingActionButton(
             onPressed: () {
-              customDialog(context);
+              customDialog(context, -1);
             },
             child: Icon(Icons.add),
           ),
@@ -57,10 +68,16 @@ class _ListBuildState extends State<ListBuild> {
     );
   }
 
-  void customDialog(context) {
+  void customDialog(context, int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        if (index != -1) {
+          nameCOntroller.text = nameList[index].name.toString();
+          idController.text = nameList[index].id.toString();
+          classController.text = nameList[index].className.toString();
+          rollNoController.text = nameList[index].rollNo.toString();
+        }
         return Dialog(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -73,10 +90,35 @@ class _ListBuildState extends State<ListBuild> {
                 ),
                 SizedBox(height: 10),
                 TextField(
+                  controller: idController,
+                  decoration: InputDecoration(
+                    label: Text("Enter Your Id"),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                SizedBox(height: 10),
+                TextField(
                   controller: nameCOntroller,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("Enter Your Name"),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: classController,
+                  decoration: InputDecoration(
+                    label: Text("Enter Your class Name"),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: rollNoController,
+                  decoration: InputDecoration(
+                    label: Text("Enter Your ROll No"),
+                    border: OutlineInputBorder(),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -86,12 +128,35 @@ class _ListBuildState extends State<ListBuild> {
                   height: 40,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (nameCOntroller.text.isEmpty) {
-                        Fluttertoast.showToast(msg: "Enter Student Name");
+                      if (idController.text.isEmpty) {
+                        Fluttertoast.showToast(msg: "Enter ID");
+                      } else if (nameCOntroller.text.isEmpty) {
+                        Fluttertoast.showToast(msg: "Enter Your Name");
+                      } else if (classController.text.isEmpty) {
+                        Fluttertoast.showToast(msg: "Enter Class Name");
+                      } else if (rollNoController.text.isEmpty) {
+                        Fluttertoast.showToast(msg: "Enter Roll No");
                       } else {
                         setState(() {
-                          nameList.add(nameCOntroller.text);
+                          Student std = Student(
+                            idController.text.toString(),
+                            nameCOntroller.text.toString(),
+                            classController.text.toString(),
+                            rollNoController.text.toString(),
+                          );
+
+                          if (index == -1) {
+                            nameList.add(std);
+                          } else {
+                            nameList[index].name = nameCOntroller.text;
+                            nameList[index].id = idController.text;
+                            nameList[index].rollNo = rollNoController.text;
+                            nameList[index].className = classController.text;
+                          }
                           nameCOntroller.clear();
+                          idController.clear();
+                          classController.clear();
+                          rollNoController.clear();
                         });
                       }
                     },
@@ -113,5 +178,30 @@ class _ListBuildState extends State<ListBuild> {
         );
       },
     );
+  }
+}
+
+class Student {
+  String? id;
+  String? name;
+  String? className;
+  String? rollNo;
+
+  Student(this.id, this.name, this.className, this.rollNo);
+
+  String? getId() {
+    return id;
+  }
+
+  String? getName() {
+    return name;
+  }
+
+  String? getClassName() {
+    return className;
+  }
+
+  String? getRollNo() {
+    return rollNo;
   }
 }
