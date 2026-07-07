@@ -1,74 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_45days_2026/list_build.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ListBuild extends StatefulWidget {
-  const ListBuild({super.key});
+class StudentList extends StatefulWidget {
+  const StudentList({super.key});
 
   @override
-  State<ListBuild> createState() => _ListBuildState();
+  State<StudentList> createState() => _StudentListState();
 }
 
-class _ListBuildState extends State<ListBuild> {
-  List<Student> nameList = [];
+class _StudentListState extends State<StudentList> {
+   List<Student> nameList = [];
   TextEditingController nameCOntroller = TextEditingController();
   TextEditingController classController = TextEditingController();
   TextEditingController rollNoController = TextEditingController();
   TextEditingController idController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ListView.builder(
-          itemCount: nameList.length,
-          itemBuilder: (BuildContext context, index) {
-            return GestureDetector(
-              onTap: () {
-                print("CHeck INdex value: $index");
-                setState(() {
-                  customDialog(context, index);
-                });
-              },
-              child: Card(
-                margin: EdgeInsets.all(5),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Sqflite Database"),
+        backgroundColor: Colors.amber,
+      ),
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemCount: 2,
+            itemBuilder: (BuildContext context, index) {
+              return Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: 5),
-                      Text(nameList[index].id.toString()),
-                      SizedBox(height: 5),
-                      Text(nameList[index].name.toString()),
-                      SizedBox(height: 5),
-                      Text(nameList[index].className.toString()),
-                      SizedBox(height: 5),
-                      Text(nameList[index].rollNo.toString()),
-                      SizedBox(height: 5),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Name"),
+                            Text("Roll No"),
+                            Text("Class"),
+                          ],
+                        ),
+                      ),
+
+                      Icon(Icons.edit),
+                      Icon(Icons.delete),
                     ],
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-
-        Positioned(
-          bottom: 10,
-          right: 10,
-          child: FloatingActionButton(
-            onPressed: () {
-              customDialog(context, -1);
+              );
             },
-            child: Icon(Icons.add),
           ),
-        ),
-        // ),
-      ],
+
+          Positioned(
+            bottom: 10,
+            right: 10,
+            child: FloatingActionButton(
+              onPressed: () {
+
+              },
+              child: Icon(Icons.add),
+            ),
+          ),
+        ],
+      ),
     );
   }
-
-  void customDialog(context, int index) {
+    void customDialog(context, int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -139,7 +139,7 @@ class _ListBuildState extends State<ListBuild> {
                       } else {
                         setState(() {
                           Student std = Student(
-                            idController.text.toString(),
+                          
                             nameCOntroller.text.toString(),
                             classController.text.toString(),
                             rollNoController.text.toString(),
@@ -180,23 +180,6 @@ class _ListBuildState extends State<ListBuild> {
     );
   }
 }
-
-class Student {
-  String? id;
-  String? name;
-  String? className;
-  String? rollNo;
-
-  Student({
-     this.id,
-     this.name,
-     this.className,
-     this.rollNo,
-  });
-
-  Map<String, String?> toMap() {
-    return {"id": id, "name": name, "className": className, "rollNo": rollNo};
-  }
-
-   
 }
+
+

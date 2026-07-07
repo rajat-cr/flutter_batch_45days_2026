@@ -9,6 +9,7 @@
       "dependencies": [
         "flutter",
         "fluttertoast",
+        "path",
         "sqflite"
       ],
       "devDependencies": [
@@ -40,6 +41,11 @@
         "test_api",
         "vector_math"
       ]
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
+      "dependencies": []
     },
     {
       "name": "sqflite",
@@ -131,11 +137,6 @@
         "clock",
         "collection"
       ]
-    },
-    {
-      "name": "path",
-      "version": "1.9.1",
-      "dependencies": []
     },
     {
       "name": "matcher",
