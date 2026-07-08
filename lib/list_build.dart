@@ -187,16 +187,14 @@ class Student {
   String? className;
   String? rollNo;
 
-  Student({
+  Student(
      this.id,
      this.name,
      this.className,
      this.rollNo,
-  });
+  );
 
-  Map<String, String?> toMap() {
-    return {"id": id, "name": name, "className": className, "rollNo": rollNo};
-  }
+ 
 
    
 }

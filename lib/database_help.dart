@@ -1,43 +1,45 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_45days_2026/list_build.dart';
+import 'package:flutter_batch_45days_2026/sqflitedb/student_list.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelp {
-
-  //object of own class
-  static final DatabaseHelp instance = DatabaseHelp._init();
-
-
-// declare Database
   static Database? _database;
 
-
-// initialozation of _init function
-  DatabaseHelp._init();
-
-
-// create the  file of database
   Future<Database?> get database async {
-    // if (_database != null) return _database;
-    _database = await _initDB("my_database.db");
+    if (_database != null) return _database;
+    _database = await initDatabasse();
     return _database;
   }
 
-// create the path of database file
-  Future<Database> _initDB(String filepath) async {
+  Future<Database?> initDatabasse() async {
     final path = await getDatabasesPath();
-    final getPath = join(path, filepath);
-    return await openDatabase(getPath, version: 1, onCreate: onCreateFun);
-  }
-
-// create the table to insert the data
-  Future onCreateFun(Database db, version) async {
-    return await db.execute(
-      "Create Table student(id INTEGER PRIMARY KEY AUTOINCREMENT), name TEXT, rollNo Text, className Text",
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute(
+          "CREATE TABLE student(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, rollNo TEXT, className TEXT)",
+        );
+      },
     );
   }
 
-  //Future<Database> insertData() {}
+  Future insertStudent(StudentClass student) async {
+    final db = await database;
+    return await db?.insert("student", student.toMap());
+  }
+
+  Future<List<StudentClass>> getStudents() async {
+    final db = await database;
+
+    List<Map<String, dynamic>> maps = await db!.query("student");
+    return List.generate(
+      maps.length,
+      (index) => StudentClass.fromMap(maps[index]),
+    );
+  }
 }
