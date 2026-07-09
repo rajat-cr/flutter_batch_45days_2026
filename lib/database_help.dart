@@ -42,4 +42,19 @@ class DatabaseHelp {
       (index) => StudentClass.fromMap(maps[index]),
     );
   }
+
+  Future updateStudent(StudentClass student) async {
+    final db = await database;
+    return await db?.update(
+      "student",
+      student.toMap(),
+      where: "id =?",
+      whereArgs: [student.id],
+    );
+  }
+
+  Future deleteStudent(int id) async {
+    final db = await database;
+    return await db?.delete("student", where: "id=?", whereArgs: [id]);
+  }
 }

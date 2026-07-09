@@ -32,7 +32,7 @@ class _StudentListState extends State<StudentList> {
       setState(() {});
 
       for (int i = 0; i < nameList.length; i++) {
-        print("Get NameList name: ${nameList[i].name}");
+        print("Get NameList name: ${nameList[i].name} , ${nameList[i].id}");
       }
     } catch (e) {
       print("Check Get Data Exception: $e");
@@ -69,8 +69,17 @@ class _StudentListState extends State<StudentList> {
                         ),
                       ),
 
-                      Icon(Icons.edit),
-                      Icon(Icons.delete),
+                      IconButton(
+                        onPressed: () {
+                          customsDialog(context, index);
+                        },
+                        icon: Icon(Icons.edit),
+                      ),
+
+                      IconButton(onPressed: () {
+
+                        
+                      }, icon: Icon(Icons.delete)),
                     ],
                   ),
                 ),
@@ -98,6 +107,7 @@ class _StudentListState extends State<StudentList> {
       context: context,
       builder: (BuildContext context) {
         if (index != -1) {
+          print("Check ID or Riya: ${nameList[index].id.toString()}");
           nameCOntroller.text = nameList[index].name.toString();
           idController.text = nameList[index].id.toString();
           classController.text = nameList[index].className.toString();
@@ -110,7 +120,7 @@ class _StudentListState extends State<StudentList> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Add Student",
+                  index == -1 ? "Add Student" : "Update Student",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
 
@@ -153,14 +163,24 @@ class _StudentListState extends State<StudentList> {
                         Fluttertoast.showToast(msg: "Enter Roll No");
                       } else {
                         setState(() {
-                          StudentClass std = StudentClass(
-                            name: nameCOntroller.text.toString(),
-                            className: classController.text.toString(),
-                            rollNo: rollNoController.text.toString(),
-                          );
-
                           try {
-                            db.insertStudent(std);
+                            if (index == -1) {
+                              StudentClass std = StudentClass(
+                                name: nameCOntroller.text.toString(),
+                                className: classController.text.toString(),
+                                rollNo: rollNoController.text.toString(),
+                              );
+
+                              db.insertStudent(std);
+                            } else {
+                              StudentClass std1 = StudentClass(
+                                id: nameList[index].id,
+                                name: nameCOntroller.text.toString(),
+                                className: classController.text.toString(),
+                                rollNo: rollNoController.text.toString(),
+                              );
+                              db.updateStudent(std1);
+                            }
 
                             Navigator.pop(context);
 
@@ -216,6 +236,7 @@ class StudentClass {
 
   factory StudentClass.fromMap(Map<String, dynamic> map) {
     return StudentClass(
+      id: map["id"],
       name: map["name"],
       className: map["className"],
       rollNo: map["rollNo"],
