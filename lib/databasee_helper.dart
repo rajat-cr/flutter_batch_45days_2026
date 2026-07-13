@@ -40,6 +40,4 @@ class DatabaseHelper {
 
     return await db.insert('users', {'name': name, 'age': age});
   }
-
-  Futur
 }

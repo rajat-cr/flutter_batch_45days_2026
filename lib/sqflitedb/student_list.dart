@@ -76,10 +76,12 @@ class _StudentListState extends State<StudentList> {
                         icon: Icon(Icons.edit),
                       ),
 
-                      IconButton(onPressed: () {
-
-                        
-                      }, icon: Icon(Icons.delete)),
+                      IconButton(
+                        onPressed: () {
+                          showAlertDialog(context, index);
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
                     ],
                   ),
                 ),
@@ -99,6 +101,34 @@ class _StudentListState extends State<StudentList> {
           ),
         ],
       ),
+    );
+  }
+
+  void showAlertDialog(context, index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Delete !"),
+          content: Text("Do you want to delete it ?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("No"),
+            ),
+            TextButton(
+              onPressed: () {
+                db.deleteStudent(nameList[index].id!);
+                getStudentData();
+                Navigator.pop(context);
+              },
+              child: Text("Yes"),
+            ),
+          ],
+        );
+      },
     );
   }
 
